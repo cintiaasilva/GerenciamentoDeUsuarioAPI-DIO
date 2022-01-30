@@ -5,6 +5,7 @@ import one.digitalinnovation.usuario.dto.request.UsuarioDTO;
 import one.digitalinnovation.usuario.exception.UsuarioNaoEncontradoExcecao;
 import one.digitalinnovation.usuario.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +35,11 @@ public class UsuarioController {
         return usuarioService.listarTodos();
     }
 
-
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void atualizarUsuario(@PathVariable Long id,
+                                 @RequestBody @Valid UsuarioDTO usuarioDTO) throws UsuarioNaoEncontradoExcecao {
+        usuarioService.atualizarUsuario(id, usuarioDTO);
+    }
 
 }

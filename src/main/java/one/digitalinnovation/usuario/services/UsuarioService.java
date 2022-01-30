@@ -29,9 +29,8 @@ public class UsuarioService {
     }
 
     public ResponseEntity<UsuarioDTO> pesquisarPorId(Long id) throws UsuarioNaoEncontradoExcecao {
-        Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new UsuarioNaoEncontradoExcecao(id));
-        UsuarioDTO usuarioDTO = usuarioMapper.toDTO(usuario);
+        verificaSeExisteUsuario(id);
+        UsuarioDTO usuarioDTO = usuarioMapper.toDTO(verificaSeExisteUsuario(id));
 
         return ResponseEntity.ok(usuarioDTO);
     }
@@ -45,4 +44,17 @@ public class UsuarioService {
 
         return ResponseEntity.ok(usuariosDto);
     }
+
+    public void atualizarUsuario(Long id, UsuarioDTO usuarioDTO) throws UsuarioNaoEncontradoExcecao {
+        verificaSeExisteUsuario(id);
+        Usuario atualizarUsuario = usuarioMapper.toModel(usuarioDTO);
+        Usuario salvarUsuario = usuarioRepository.save(atualizarUsuario);
+    }
+
+
+    private Usuario verificaSeExisteUsuario(Long id) throws UsuarioNaoEncontradoExcecao {
+        return usuarioRepository.findById(id)
+                .orElseThrow(() -> new UsuarioNaoEncontradoExcecao(id));
+    }
 }
+
