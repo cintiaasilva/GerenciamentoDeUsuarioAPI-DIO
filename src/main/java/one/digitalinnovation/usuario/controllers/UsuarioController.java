@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/usuario")
@@ -26,6 +27,11 @@ public class UsuarioController {
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioDTO> pesquisarPorId(@PathVariable Long id) throws UsuarioNaoEncontradoExcecao {
         return usuarioService.pesquisarPorId(id);
+    }
+
+    @GetMapping("/todos-usuarios")
+    public ResponseEntity<List<UsuarioDTO>> listarTodos() {
+        return usuarioService.listarTodos();
     }
 
 
