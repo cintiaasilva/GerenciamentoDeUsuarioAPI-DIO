@@ -2,13 +2,11 @@ package one.digitalinnovation.usuario.controllers;
 
 import lombok.AllArgsConstructor;
 import one.digitalinnovation.usuario.dto.request.UsuarioDTO;
+import one.digitalinnovation.usuario.exception.UsuarioNaoEncontradoExcecao;
 import one.digitalinnovation.usuario.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -24,6 +22,12 @@ public class UsuarioController {
         ResponseEntity usuarioCriado = usuarioService.criarUsuario(usuarioDTO);
         return usuarioCriado;
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuarioDTO> pesquisarPorId(@PathVariable Long id) throws UsuarioNaoEncontradoExcecao {
+        return usuarioService.pesquisarPorId(id);
+    }
+
 
 
 }

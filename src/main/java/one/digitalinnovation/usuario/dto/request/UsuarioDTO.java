@@ -18,8 +18,6 @@ import java.util.List;
 @NoArgsConstructor
 public class UsuarioDTO {
 
-    private Long id;
-
     @NotEmpty
     @Size(min = 2, max = 100)
     private String primeiroNome;
@@ -42,7 +40,6 @@ public class UsuarioDTO {
     @Override
     public String toString() {
         return "UsuarioDTO{" +
-                "id=" + id +
                 ", primeiroNome='" + primeiroNome + '\'' +
                 ", segundoNome='" + segundoNome + '\'' +
                 ", cpf='" + cpf + '\'' +
