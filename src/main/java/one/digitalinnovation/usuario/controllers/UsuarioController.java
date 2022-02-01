@@ -42,4 +42,8 @@ public class UsuarioController {
         usuarioService.atualizarUsuario(id, usuarioDTO);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity excluirUsuario(@PathVariable Long id) throws UsuarioNaoEncontradoExcecao {
+        return usuarioService.excluirUsuario(id);
+    }
 }

@@ -24,7 +24,7 @@ public class UsuarioService {
 
     public ResponseEntity criarUsuario(UsuarioDTO usuarioDTO) {
         Usuario usuario = usuarioMapper.toModel(usuarioDTO);
-        Usuario salvarUsuario = usuarioRepository.save(usuario);
+        usuarioRepository.save(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -49,10 +49,17 @@ public class UsuarioService {
         verificaSeExisteUsuario(id);
         Usuario atualizarUsuario = usuarioMapper.toModel(usuarioDTO);
         atualizarUsuario.setId(id);
-        Usuario salvarUsuario = usuarioRepository.save(atualizarUsuario);
+        usuarioRepository.save(atualizarUsuario);
     }
 
+    public ResponseEntity excluirUsuario(Long id) throws UsuarioNaoEncontradoExcecao {
+        verificaSeExisteUsuario(id);
+        usuarioRepository.deleteById(id);
 
+        return ResponseEntity.ok("Usuario excluido com sucesso!!");
+    }
+
+    
     private Usuario verificaSeExisteUsuario(Long id) throws UsuarioNaoEncontradoExcecao {
         return usuarioRepository.findById(id)
                 .orElseThrow(() -> new UsuarioNaoEncontradoExcecao(id));
