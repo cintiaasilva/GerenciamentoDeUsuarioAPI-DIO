@@ -48,6 +48,7 @@ public class UsuarioService {
     public void atualizarUsuario(Long id, UsuarioDTO usuarioDTO) throws UsuarioNaoEncontradoExcecao {
         verificaSeExisteUsuario(id);
         Usuario atualizarUsuario = usuarioMapper.toModel(usuarioDTO);
+        atualizarUsuario.setId(id);
         Usuario salvarUsuario = usuarioRepository.save(atualizarUsuario);
     }
 
