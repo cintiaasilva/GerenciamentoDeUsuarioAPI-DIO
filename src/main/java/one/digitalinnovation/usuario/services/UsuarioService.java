@@ -59,7 +59,7 @@ public class UsuarioService {
         return ResponseEntity.ok("Usuario excluido com sucesso!!");
     }
 
-    
+
     private Usuario verificaSeExisteUsuario(Long id) throws UsuarioNaoEncontradoExcecao {
         return usuarioRepository.findById(id)
                 .orElseThrow(() -> new UsuarioNaoEncontradoExcecao(id));

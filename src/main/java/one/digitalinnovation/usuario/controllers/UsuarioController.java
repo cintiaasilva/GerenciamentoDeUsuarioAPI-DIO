@@ -46,4 +46,13 @@ public class UsuarioController {
     public ResponseEntity excluirUsuario(@PathVariable Long id) throws UsuarioNaoEncontradoExcecao {
         return usuarioService.excluirUsuario(id);
     }
+
+
+
+    ////////////////////////////////////TESTE DO HEROKU////////////////////////////////////
+
+    @GetMapping
+    public String teste(){
+        return "Hello Heroku, minha API está no ar";
+    }
 }
